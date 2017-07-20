@@ -67,6 +67,20 @@ int main(int argc, char *argv[])
           pid.UpdateError(cte);
           steer_value = pid.TotalError();
 
+          // Limit steer value to range -1 to +1
+          if (steer_value > 1)
+          {
+            steer_value = 1;
+          }
+          else
+          {
+            if (steer_value < -1)
+            {
+              steer_value = -1;
+            }
+          }
+
+
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
