@@ -48,6 +48,10 @@ int main(int argc, char *argv[])
     Ki_init = -1 * std::stod(argv[2]);
     Kd_init = -1 * std::stod(argv[3]);
   }
+  else
+  {
+    std::cout << "Use default Kp = -0.175, Ki = -0.003, Kd = -15" << std::endl;
+  }
 
   pid.Init(Kp_init, Ki_init, Kd_init);
 
@@ -136,7 +140,7 @@ int main(int argc, char *argv[])
 
 
           // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
+          //std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
