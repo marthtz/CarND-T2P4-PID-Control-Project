@@ -7,6 +7,8 @@ Self-Driving Car Engineer Nanodegree Program
 
 The task was to build a PID controller and tuning its parameters so the car drives savely around the track in the provided simulator. In addition, I added a simple throttle control to achieve higher speeds on the track.
 
+A video of the car driving one lap in the simulator is uploaded to Youtube: https://youtu.be/3rF6B3OSSaw
+
 The program is executed with and without arguments using the following command:
 ```
 ./pid [<Kp> <Ki> <Kd>]
