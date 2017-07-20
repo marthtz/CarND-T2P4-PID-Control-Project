@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
   PID pid;
   // TODO: Initialize the pid variable.
 
-  double Kp_init = std::stod(argv[1]); //0.2;
-  double Ki_init = std::stod(argv[2]); // 0.0005;//0.004;
-  double Kd_init = std::stod(argv[3]); //2.0;//3.0;
+  double Kp_init = -1 * std::stod(argv[1]); //0.2;
+  double Ki_init = -1 * std::stod(argv[2]); // 0.0005;//0.004;
+  double Kd_init = -1 * std::stod(argv[3]); //2.0;//3.0;
 
   pid.Init(Kp_init, Ki_init, Kd_init);
 
@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
           */
           pid.UpdateError(cte);
           steer_value = pid.TotalError();
+
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
