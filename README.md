@@ -3,6 +3,41 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Project Summary
+
+The task was to build a PID controller and tuning its parameters so the car drives savely around the track in the provided simulator. In addition, I added a simple throttle control to achieve higher speeds on the track.
+
+The program is executed with and without arguments using the following command:
+```
+./pid [<Kp> <Ki> <Kd>]
+```
+Examples:
+* `./pid 0.1 0.002 3.0` - This runs the program with Kp = 0.1, Ki = 0.002 and Kd = 3.0.
+* `./pid` - This runs the program with the default parameters that were manually tuned.
+
+### PID Controller
+#### P (proportional, Kp)
+The P element is the main component of the controller and directly affects how the car is approaching the lane center. It countersteers proportionally the the CTE. This parameter also tends to overshoot the car, so it starts oscillating around the lane center. The D component in the controller help to reduce this effect.
+#### I (integral, Ki)
+The I element of the PID controller is basically used to deal with a systematic bias (e.g. when the steering is not balanced and you have to steer to some degree to go straight). As the simulator doesn't seem to have any bias, this parameter had little effect while testing. However, it did make the drive a bit smoother.
+#### D (differential, Kd)
+The D element is the component that prevents the car from overshooting too much and therefore reduced the controllers trend to oscillate around the lane center.
+
+### Parameter Tuning
+The P, I and D parameters of the controller were tuned manually in a step-by-step process. As a starting point I chose values similar to the ones in the lesson. From there on, I gradually tuned each parameter. I started with a slow speed and tuned Kp first. Next parameter tuned was Kd as it removes the oscillation. Ki was tuned last and had just little effect on the smoothness. I thought about using twiddle to tune the parameters but it turned out that with the simulator no convenient ways exists to start-stop-restart the simulation automatically. Hence, I statyed with the manual process.
+Finally, I chose the following parameter, which I set as default:
+* Kp = -0.175
+* Ki = -0.003
+* Kd = -15
+
+### Throttle Control
+To achieve higher speeds I implemented a very simple throttle control, basically a P controller using a couple of IF statements. Depending on the steering value a throttle value is set. The smaller the steering value, the higher the throttle. For very large steering values the throttle is set negative, so the car brakes. Max speed achieved is approx. 50.
+
+### Final Result
+A video of the car driving one lap in the simulator is uploaded to Youtube: https://youtu.be/3rF6B3OSSaw
+
+---
+
 ## Dependencies
 
 * cmake >= 3.5
