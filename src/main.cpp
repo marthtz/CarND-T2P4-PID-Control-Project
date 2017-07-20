@@ -80,13 +80,58 @@ int main(int argc, char *argv[])
             }
           }
 
+          // Simple throttle control
+          double steerFraction = 0.2;
+          double baseThrottle = 0.25;
+          double throttle;
+
+          if (fabs(steer_value) < steerFraction)
+          {
+            // Small angle - increase throttle
+            throttle = 2 * baseThrottle;
+          }
+          else
+          {
+            if (fabs(steer_value) < 2*steerFraction)
+            {
+              throttle = 1.5 * baseThrottle;
+            }
+            else
+            {
+              if (fabs(steer_value) < 3*steerFraction)
+              {
+                throttle = 1 * baseThrottle;
+              }
+              else
+              {
+                if (fabs(steer_value) < 4*steerFraction)
+                {
+                  throttle = 0.5 * baseThrottle;
+                }
+                else
+                {
+                  if (fabs(steer_value) < 5*steerFraction)
+                  {
+                    // Large angle - brake a little bit!
+                    throttle = -0.5 * baseThrottle;
+                  }
+                  else
+                  {
+                    // Very large angle - brake!
+                    throttle = -baseThrottle;
+                  }
+                }
+              }
+            }
+          }
+
 
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
+          msgJson["throttle"] = throttle;//0.3;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
