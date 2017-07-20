@@ -36,9 +36,18 @@ int main(int argc, char *argv[])
   PID pid;
   // TODO: Initialize the pid variable.
 
-  double Kp_init = -1 * std::stod(argv[1]); //0.2;
-  double Ki_init = -1 * std::stod(argv[2]); // 0.0005;//0.004;
-  double Kd_init = -1 * std::stod(argv[3]); //2.0;//3.0;
+  // Init PID vars with tuned set
+  double Kp_init = -0.175;
+  double Ki_init = -0.0003;
+  double Kd_init = -15;
+
+  // If PID parameters are given with argument, use these!
+  if (argc == 4)
+  {
+    Kp_init = -1 * std::stod(argv[1]);
+    Ki_init = -1 * std::stod(argv[2]);
+    Kd_init = -1 * std::stod(argv[3]);
+  }
 
   pid.Init(Kp_init, Ki_init, Kd_init);
 
