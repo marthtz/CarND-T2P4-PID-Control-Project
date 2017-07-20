@@ -31,9 +31,10 @@ Finally, I chose the following parameter, which I set as default:
 * Kd = -15
 
 ### Throttle Control
-To achieve higher speeds I implemented a very simple throttle control, basically a P controller using a couple of IF statements. Depending on the steering value a throttle value is set. The smaller the steering value, the higher the throttle. For very large steering values the throttle is set negative, so the car brakes.
+To achieve higher speeds I implemented a very simple throttle control, basically a P controller using a couple of IF statements. Depending on the steering value a throttle value is set. The smaller the steering value, the higher the throttle. For very large steering values the throttle is set negative, so the car brakes. Max speed achieved is approx. 50.
 
-
+### Final Result
+A video of the car driving one lap in the simulator is uploaded to Youtube: https://youtu.be/3rF6B3OSSaw
 
 ---
 
